@@ -1,0 +1,170 @@
+<title>[Project] status</title>
+<style>
+/* Project status page template (skill: project-status-page). Every colour is a token, so both themes read.
+   This page is link-shared: never put a server address, key path, secret, personal email or customer data on it. */
+:root{--bg:#f8fafc;--card:#ffffff;--ink:#0f172a;--muted:#64748b;--line:#e2e8f0;--green:#16a34a;--blue:#2563eb;--grey:#94a3b8;--amber:#d97706;--red:#dc2626;--greenbg:#dcfce7;--bluebg:#dbeafe;--greybg:#e2e8f0;--amberbg:#fef3c7;--redbg:#fee2e2;--track:#e2e8f0}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0b1220;--card:#111a2e;--ink:#e5e7eb;--muted:#94a3b8;--line:#1f2a44;--greenbg:#14532d;--bluebg:#1e3a8a;--greybg:#273449;--amberbg:#5a3d0a;--redbg:#5c1a1a;--track:#1f2a44;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0b1220;--card:#111a2e;--ink:#e5e7eb;--muted:#94a3b8;--line:#1f2a44;--greenbg:#14532d;--bluebg:#1e3a8a;--greybg:#273449;--amberbg:#5a3d0a;--redbg:#5c1a1a;--track:#1f2a44;color-scheme:dark}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:960px;margin:0 auto;padding-block:24px 48px;padding-inline:16px}
+h1{font-size:26px;margin:0 0 4px;text-wrap:balance}
+h2{font-size:15px;margin:28px 0 10px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+p{margin:6px 0}.stamp{color:var(--muted);font-size:14px}
+ul{margin:6px 0 0 18px;padding:0}li{margin:5px 0}
+.card{border:1px solid var(--line);background:var(--card);border-radius:12px;padding:14px 16px;min-width:0}
+.ask{background:var(--amberbg);border-color:var(--amber);margin:14px 0 16px}
+.ask ol{margin:6px 0 0 20px;padding:0}.ask li{margin:6px 0}
+.done li::marker{color:var(--green)}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:640px){.tiles{grid-template-columns:1fr}}
+.tile{border:1px solid var(--line);background:var(--card);border-radius:12px;padding:14px 16px;min-width:0}
+.tile .n{font-size:34px;font-weight:700;line-height:1.1;font-variant-numeric:tabular-nums}
+.tile .l{color:var(--muted);font-size:14px;margin-top:2px}
+.caught{border-left:3px solid var(--red);padding:2px 0 2px 12px;margin:10px 0}
+.fixed{border-left-color:var(--green)}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px;align-items:start}
+@media(max-width:640px){.pair{grid-template-columns:1fr}}
+.pair figure{margin:0;min-width:0}
+.pair img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:8px}
+.pair figcaption{color:var(--muted);font-size:13px;margin-bottom:4px}
+.answer{border:2px solid var(--blue);background:var(--card);border-radius:14px;padding:16px 18px;margin:18px 0}
+.answer h3{margin:0 0 4px;font-size:21px;text-wrap:balance}
+.answer h4{margin:18px 0 6px;font-size:15px}
+.loop{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.step{flex:1 1 140px;min-width:0;border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--bg)}
+.step b{display:block;font-size:15px}.step span{display:block;color:var(--muted);font-size:13.5px;margin-top:2px}
+.step .num{display:inline-block;width:22px;height:22px;border-radius:50%;background:var(--blue);color:var(--card);text-align:center;font-size:13px;line-height:22px;margin-right:6px;font-weight:700}
+.tbl{overflow-x:auto}.tbl table{border-collapse:collapse;width:100%;min-width:520px;font-size:14.5px}
+.tbl th,.tbl td{border-bottom:1px solid var(--line);padding:7px 8px;text-align:left;vertical-align:top}
+.tbl th{color:var(--muted);font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.04em}
+.have{color:var(--green);font-weight:600}.need{color:var(--amber);font-weight:600}
+.lanes{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media(max-width:860px){.lanes{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.lanes{grid-template-columns:1fr}}
+.lane{border:1px solid var(--line);background:var(--card);border-radius:12px;padding:12px 14px;min-width:0}
+.lane b{display:block}
+.lane b::before{content:"";display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:7px}
+.lane small{color:var(--muted);display:block;margin-top:4px;font-size:14px}
+.l-now b::before{background:var(--blue)}.l-next b::before{background:var(--green)}.l-wait b::before{background:var(--amber)}.l-idle b::before{background:var(--grey)}
+.ph{display:grid;grid-template-columns:150px 1fr;gap:14px;padding:12px 0;border-bottom:1px solid var(--line)}
+.ph:last-child{border-bottom:0}
+@media(max-width:640px){.ph{grid-template-columns:1fr;gap:2px}}
+.ph .when{font-weight:700;font-variant-numeric:tabular-nums}
+.ph .when small{display:block;font-weight:400;color:var(--muted);font-size:13px}
+.ph p{margin:2px 0}.ph .note{color:var(--muted);font-size:14px}
+.tag{display:inline-block;font-size:12px;font-weight:600;border-radius:6px;padding:1px 7px;margin-left:6px;vertical-align:1px}
+.t-done{background:var(--greenbg)}.t-now{background:var(--bluebg)}.t-wait{background:var(--amberbg)}.t-later{background:var(--greybg)}
+.row{display:grid;grid-template-columns:150px 1fr 240px;gap:12px;align-items:center;margin:10px 0}
+@media(max-width:640px){.row{grid-template-columns:1fr;gap:4px}}
+.row .k{font-weight:600}.row .v{color:var(--muted);font-size:14px;text-align:right;font-variant-numeric:tabular-nums}
+@media(max-width:640px){.row .v{text-align:left}}
+.bar{height:22px;border-radius:11px;background:var(--track);overflow:hidden;display:flex}
+.bar span{display:block;height:100%}
+</style>
+<div class="wrap">
+
+<!-- 1. HEADER. The stamp time comes from `date`. One bold phrase for what is live, one sentence for the plan. -->
+<h1>[Project] status</h1>
+<p class="stamp">[Weekday DD Month YYYY, h:mm am/pm Timezone]. <b>[Release N is live.]</b> [What happens next, in one line.] <b>The plan:</b> [the product goal in one sentence].</p>
+
+<!-- 2. JUMP LINK. Only when the owner asked a question that is answered lower down. -->
+<p><a href="#answer"><b>Jump to: [their question, in their words]</b></a></p>
+
+<!-- 3. NOW (YOUR TIME). At most 3 numbered items. Decisions listed here are ALSO asked with the choice prompt; the page only shows them. -->
+<div class="card ask">
+<p><b>Now (your time)</b></p>
+<ol>
+<li><b>[Test release N]:</b> [what to do]. Check [three or four things they can see on the screen].</li>
+<li><b>[Decision, yes or no]:</b> [what it does in plain words], about [$ per month].</li>
+</ol>
+</div>
+
+<!-- 4. TODAY. Done (live), merged but not live yet, being built now, one spend line. -->
+<div class="card">
+<p><b>Today ([weekday])</b></p>
+<ul class="done">
+<li><b>[What went live]</b>: [what changed on the screen]. [Their own words about it, if they gave any.]</li>
+</ul>
+<p><b>Done for release [N+1] (merged, not live yet):</b></p>
+<ul class="done">
+<li>[change, as a screen effect]</li>
+</ul>
+<p><b>Being built now:</b></p>
+<ul>
+<li><b>[Feature]</b>: [one line], about [cost per press or per month].</li>
+</ul>
+<p><b>Spend check:</b> [real spend against the cap, in one sentence].</p>
+</div>
+
+<!-- 5. THEIR QUESTION ANSWERED. Only when they asked one. Short answer and cost first. Delete the whole block otherwise. -->
+<div class="answer" id="answer">
+<h3>Your question: [their question]</h3>
+<p><b>Short answer: [yes / no / it depends, in one sentence].</b> It costs about <b>[$ per month]</b>.</p>
+<div class="loop" aria-label="How it works">
+<div class="step"><b><span class="num">1</span>[Step]</b><span>[What happens, in plain words.]</span></div>
+<div class="step"><b><span class="num">2</span>[Step]</b><span>[What happens.]</span></div>
+<div class="step"><b><span class="num">3</span>[Step]</b><span>[What happens.]</span></div>
+<div class="step"><b><span class="num">4</span>[Step]</b><span>[What happens.]</span></div>
+</div>
+<h4>Already built vs to build</h4>
+<div class="tbl"><table>
+<tr><th>Piece</th><th>Status</th></tr>
+<tr><td>[piece]</td><td class="have">built</td></tr>
+<tr><td>[piece]</td><td class="need">to build, about [n] days</td></tr>
+</table></div>
+<h4>Your answers ([date])</h4>
+<ul class="done"><li>[What they decided.]</li></ul>
+</div>
+
+<!-- 6. THREE NUMBERS. Only numbers they care about: changes shipped, cost per unit, cost per month against their budget. -->
+<div class="tiles">
+<div class="tile"><div class="n">[n]</div><div class="l">[changes in release N, all reviewed and tested.]</div></div>
+<div class="tile"><div class="n">≈ $[x]</div><div class="l">[per unit, everything included.]</div></div>
+<div class="tile"><div class="n">≈ $[y]</div><div class="l">[a month at their real volume, inside the $[budget] budget.]</div></div>
+</div>
+
+<!-- 7. WHAT THE LIVE RELEASE BRINGS. One line per change, written as what they will see. Name known gaps. -->
+<h2>What release [N] brings</h2>
+<div class="card">
+<div class="caught fixed"><b>[Change]</b>: [what it does on the screen].</div>
+<div class="caught"><b>[Problem caught before release]</b>: [what would have gone wrong, and the fix].</div>
+<p class="stamp">Known gap: [what is not in it yet, and when it comes].</p>
+</div>
+
+<!-- 8. BUILT SINCE THE LAST RELEASE, with before/after screenshots. Captions say what the picture SHOWS. Embed as compressed JPEG data URIs. -->
+<h2>Built since release [N] (goes out in [N+1])</h2>
+<div class="card">
+<ul class="done">
+<li><b>[Change]</b>: [screen effect].</li>
+</ul>
+<div class="pair">
+<figure><figcaption>Before: [what is wrong in this picture]</figcaption><img alt="[before screen]" src="data:image/jpeg;base64,..."></figure>
+<figure><figcaption>After: [what is better]</figcaption><img alt="[after screen]" src="data:image/jpeg;base64,..."></figure>
+</div>
+</div>
+
+<!-- 9. THE TEAM. One card per lane: what it is on. Dot: blue building now, green next, amber waiting on something, grey idle or stopped. -->
+<h2>The team</h2>
+<div class="lanes">
+<div class="lane l-now"><b>[Lane name]</b><small>[What it is building, in plain words.]</small></div>
+<div class="lane l-next"><b>[Lane name]</b><small>[What it does next.]</small></div>
+<div class="lane l-wait"><b>[Reviewer]</b><small>[What it is waiting for.]</small></div>
+</div>
+
+<!-- 10. WHEN IT'S READY. Rough dates; tag each row. -->
+<h2>When it's ready (rough dates)</h2>
+<div class="card">
+<div class="ph"><div class="when">[date]<small>[release]</small></div><div><p><b>[What arrives]</b><span class="tag t-done">Live</span></p><p class="note">[one line]</p></div></div>
+<div class="ph"><div class="when">[date]<small>[release]</small></div><div><p><b>[What arrives]</b><span class="tag t-now">Being built</span></p></div></div>
+<div class="ph"><div class="when">[date]</div><div><p><b>[What arrives]</b><span class="tag t-wait">Waiting on you</span></p></div></div>
+<div class="ph"><div class="when">Later</div><div><p><b>[What arrives]</b><span class="tag t-later">Later</span></p></div></div>
+</div>
+
+<!-- 11. BUDGET. One bar per spending line: spent against its cap. Widths are percentages of the cap. -->
+<h2>Budget</h2>
+<div class="card">
+<div class="row"><div class="k">[AI calls]</div><div class="bar"><span style="width:[40]%;background:var(--green)"></span></div><div class="v">$[spent] of $[cap] this month</div></div>
+<div class="row"><div class="k">[Hosting]</div><div class="bar"><span style="width:[0]%;background:var(--green)"></span></div><div class="v">$0, free tier</div></div>
+</div>
+
+</div>

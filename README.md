@@ -1,6 +1,6 @@
 # Skills
 
-Every agent skill I use, in one place. Five I wrote myself. The rest are by other people, copied unchanged with each author's licence and credit kept next to their work. Each author's folder has a `SOURCE.md` that links back to the original, so check there for the newest version.
+Every agent skill I use, in one place. Seven I wrote myself. The rest are by other people, copied unchanged with each author's licence and credit kept next to their work. Each author's folder has a `SOURCE.md` that links back to the original, so check there for the newest version.
 
 ★ = my picks, if you only try a few.
 
@@ -10,6 +10,7 @@ Every agent skill I use, in one place. Five I wrote myself. The rest are by othe
 |---|---|---|
 | [superpowers](superpowers/) | A full working method: brainstorm, plan, write tests first, debug, review, finish the branch | [Jesse Vincent](https://github.com/obra) |
 | [ui-standards](mine/ui-standards/) | UI design: one standard every agent follows, built from 14 popular design repos, so screens stop looking AI-made | me |
+| [agent-team-playbook](mine/agent-team-playbook/) | How one person runs a software project with a small AI team: a PM agent, builders and reviewers | me |
 | [prototype](emilkowalski/prototype/) | UI design: builds 3 to 5 truly different versions of a piece of UI, with a picker to flip between them | [Emil Kowalski](https://github.com/emilkowalski) |
 | [impeccable](https://github.com/pbakaus/impeccable) | UI design: designs, critiques and polishes interfaces, with a live in-browser mode | [pbakaus](https://github.com/pbakaus) (plugin, linked) |
 | [frontend-design](anthropic/frontend-design/) | UI design: gives an interface its own look, so it doesn't feel templated | [Anthropic](https://github.com/anthropics) |
@@ -25,9 +26,11 @@ MIT licence, see [mine/LICENSE](mine/LICENSE).
 | Skill | What it does |
 |---|---|
 | ★ [ui-standards](mine/ui-standards/) | One UI standard for every agent and every screen. It merges 14 popular design repos into one set of rules with exact numbers, settles the 11 places where they disagree, lists the signs of an AI-made screen with what to do instead, and ends with a check-by-looking routine and a review gate. `PROMPT.md` is a paste-in version for tools that can't load skills. |
+| ★ [agent-team-playbook](mine/agent-team-playbook/) | How one person runs a software project with a small AI team: a PM agent that plans and merges, 3 to 5 builder agents and 1 or 2 independent reviewers. It covers build turns (only a few heavy jobs at once on one machine), quick targeted checks locally with the whole suite on CI, which changes need a reviewer, the merge gate, releases, and how to talk to the owner. `SPEEDUPS.md` is the history: each thing that slowed the team down, what it cost, and the rule that replaced it. `PROMPT.md` is a paste-in version for other tools. |
 | ★ [five-distinct-test](mine/five-distinct-test/) | For voice AI testing. A readiness gate for each step of a call flow: 5 distinct real caller lines, all must land on the right next step, and any failure resets the streak to 0. Comes with a small script and an offline demo. |
 | ★ [pr-plain-words](mine/pr-plain-words/) | Explains each pull request in five plain answers: what changes in the records, the flow, who uses it, what they see, and why. |
 | ★ [pr-like-a-pro](mine/pr-like-a-pro/) | The pull-request body itself: re-anchors a tired reader in three sentences, then carries every measurement a reviewer needs. |
+| [project-status-page](mine/project-status-page/) | One living status page per project for an owner who doesn't read code: what's live, what needs them, what's being built and what it costs, in one link that stays current. Comes with a page template. |
 | [feature-roadmap](mine/feature-roadmap/) | Before any feature starts, a one-page flowchart in plain words, published as a link the owner can follow. |
 
 ## By other people
