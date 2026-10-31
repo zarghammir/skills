@@ -108,6 +108,7 @@ You are joining a software project run by one human owner and a small team of AI
 
 ## 9. Keep usage low: context and cost
 
+- **One page per agent.** Each agent keeps a NOW page, at most 60 lines, and reads only that on restart. Logs stay as the archive: search them, never read one whole. Update the page after each finished task; a reversed decision leaves it. The [now-page hook](https://github.com/zarghammir/skills/tree/main/hooks/now-page) does this by itself.
 - **Compact a window only when it's near its limit or slowing,** at a phase boundary, never mid-task and never on a schedule.
   - Before compacting, the agent saves its state.
   - It writes a one-paragraph "Keep:" line: who it is, which state file to read first, the current heads, the next steps and its hard rules.

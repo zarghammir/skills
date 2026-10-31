@@ -11,6 +11,7 @@ Every agent skill I use, in one place. Seven I wrote myself. The rest are by oth
 | [superpowers](superpowers/) | A full working method: brainstorm, plan, write tests first, debug, review, finish the branch | [Jesse Vincent](https://github.com/obra) |
 | [ui-standards](mine/ui-standards/) | UI design: one standard every agent follows, built from 14 popular design repos, so screens stop looking AI-made | me |
 | [agent-team-playbook](mine/agent-team-playbook/) | How one person runs a software project with a small AI team: a PM agent, builders and reviewers | me |
+| [now-page](hooks/now-page/) | A hook: each agent keeps one short page and reads only that on restart, so it stays fast, cheap and up to date | me |
 | [prototype](emilkowalski/prototype/) | UI design: builds 3 to 5 truly different versions of a piece of UI, with a picker to flip between them | [Emil Kowalski](https://github.com/emilkowalski) |
 | [impeccable](https://github.com/pbakaus/impeccable) | UI design: designs, critiques and polishes interfaces, with a live in-browser mode | [pbakaus](https://github.com/pbakaus) (plugin, linked) |
 | [frontend-design](anthropic/frontend-design/) | UI design: gives an interface its own look, so it doesn't feel templated | [Anthropic](https://github.com/anthropics) |
@@ -32,6 +33,14 @@ MIT licence, see [mine/LICENSE](mine/LICENSE).
 | ★ [pr-like-a-pro](mine/pr-like-a-pro/) | The pull-request body itself: re-anchors a tired reader in three sentences, then carries every measurement a reviewer needs. |
 | [project-status-page](mine/project-status-page/) | One living status page per project for an owner who doesn't read code: what's live, what needs them, what's being built and what it costs, in one link that stays current. Comes with a page template. |
 | [feature-roadmap](mine/feature-roadmap/) | Before any feature starts, a one-page flowchart in plain words, published as a link the owner can follow. |
+
+## Hooks
+
+Hooks run by themselves, so there's nothing to remember in each window.
+
+| Hook | What it does |
+|---|---|
+| ★ [now-page](hooks/now-page/) | One short page per agent, read by itself on every restart. Old logs stay in the drawer until a job needs them. |
 
 ## By other people
 

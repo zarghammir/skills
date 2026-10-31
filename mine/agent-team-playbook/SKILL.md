@@ -71,6 +71,16 @@ Then post one comment on the ticket. Batch the merges back to back. A later push
 
 **Owner message:** the answer first, then a small table if it needs numbers (per unit and per month; AI spend versus other spend), then the questions at the bottom. Add a phone push only when something needs them.
 
+## One page per agent (NOW pages)
+
+An agent's context is re-sent with every message, so old notes cost usage and cause mistakes. Each agent keeps one page, at most 60 lines: Updated time, Goal, In progress, Next 3, Blocked / waiting, Decisions that still matter, Gotchas. One line each, with links.
+
+- On restart, an agent reads only its page. Logs stay where they are as the archive: search them, never read one whole.
+- Update the page after each finished task. A reversed decision leaves the page.
+- With pages current, nobody needs a state-save round before a compact.
+- Keep the always-loaded memory index short too. It sits on every agent's desk all day.
+- The [now-page hook](https://github.com/zarghammir/skills/tree/main/hooks/now-page) does this by itself in every window.
+
 ## Usage discipline (what kept cost minimal)
 
 - **Compact a window only when it's near its limit or slowing,** never on a schedule. Scheduled rounds (every 3–4 hours, every window at once) froze the whole team and cost more than they saved once usage allowed. When a window does need it:
