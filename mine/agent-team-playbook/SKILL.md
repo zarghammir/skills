@@ -79,7 +79,7 @@ An agent's context is re-sent with every message, so old notes cost usage and ca
 - Update the page after each finished task. A reversed decision leaves the page.
 - With pages current, nobody needs a state-save round before a compact.
 - Keep the always-loaded memory index short too. It sits on every agent's desk all day.
-- The [clean-desk hook](https://github.com/zarghammir/skills/tree/main/hooks/clean-desk) does this by itself in every window.
+- The [clean-desk hook](https://github.com/zarghammir/hooks/tree/main/clean-desk) does this by itself in every window.
 
 ## Usage discipline (what kept cost minimal)
 
