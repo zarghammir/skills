@@ -1,4 +1,4 @@
-# <Role>: NOW
+# <Role>: sticky note
 Updated: YYYY-MM-DD HH:MM. History: <link to your log>.
 
 ## Goal
